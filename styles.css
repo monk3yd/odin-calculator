@@ -7,3 +7,63 @@
 html {
     font-size: 62.5%;
 }
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    font-size: 1.8rem;
+}
+
+#calculator,
+#display,
+.button {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+#calculator {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 2rem;
+    height: 50rem;
+    width: 40rem;
+}
+
+#display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6rem;
+    margin-bottom: 2rem;
+}
+
+#buttons-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.clear {
+    flex: 3;
+}
+
+.zero {
+    flex: 2;
+}
