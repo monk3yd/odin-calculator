@@ -35,9 +35,13 @@ body {
 #display {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     height: 6rem;
     margin-bottom: 2rem;
+}
+
+#numbers {
+    margin-right: 4rem;
 }
 
 #buttons-container {
