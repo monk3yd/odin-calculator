@@ -52,7 +52,7 @@ buttons.forEach(button => {
         } else if (btnValue === "." && numbers.textContent.includes(".")) {
             return;
         // Replace init 0 in display for first entered num
-        } else if (btnValue !== "0" && numbers.textContent === "0"){
+        } else if (btnValue !== "0" && btnValue != "." && numbers.textContent === "0"){
             numbers.textContent = "";
         }
         numbers.textContent += btnValue;
