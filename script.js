@@ -17,3 +17,15 @@ function divide(...args) {
     let total = args.reduce((a, b) => a / b);
     return total;
 };
+
+function operate(operator, a, b) {
+    if (operator === "+") {
+        return add(a, b);
+    } else if (operator === "-") {
+        return substract(a, b);
+    } else if (operator === "*") {
+        return multiply(a, b);
+    } else if (operator === "/") {
+        return divide(a, b);
+    }
+};
