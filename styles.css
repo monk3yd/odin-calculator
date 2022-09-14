@@ -19,7 +19,7 @@ body {
 
 #calculator,
 #display,
-.button {
+.btn {
     border: 1px solid gray;
     border-radius: 5px;
 }
@@ -53,7 +53,7 @@ body {
     align-items: stretch;
 }
 
-.button {
+.btn {
     display: flex;
     align-items: center;
     justify-content: center;
