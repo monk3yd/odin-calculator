@@ -44,26 +44,30 @@ buttons.forEach(button => {
             const chars = [...numbers.textContent]
             console.log(chars);
 
-            // get operator index
-            const operatorIndex = chars.indexOf("+");
+            const allOperators = ["*", "/", "+", "-"];
+            for (let operator of allOperators ) {
+                // get operator index
+                const operatorIndex = chars.indexOf(operator);
+                console.log(operatorIndex);
 
-            // Extract operator from array
-            const operator = chars[operatorIndex];
+                // if operator exists in array
+                if (operatorIndex !== -1) {
+                    // Extract numbers by removing operators
+                    chars.splice(operatorIndex, 1);
+                    console.log(chars);
+                    let firstNum = Number(chars[0]);
+                    let secondNum = Number(chars[1]);
 
-            // if operator exists in array
-            if (operatorIndex !== -1) {
+                    // Calculate operation result 
+                    const result = operate(operator, firstNum, secondNum)
 
-                // Extract numbers by removing operators
-                chars.splice(operatorIndex, 1);
-                console.log(chars);
-                let firstNum = Number(chars[0]);
-                let secondNum = Number(chars[1]);
+                    chars.shift()
+                    chars.shift()
 
-                // Calculate, show and save result
-                const result = operate(operator, firstNum, secondNum)
-
-                numbers.textContent = result;
-                return;
+                    // Show result
+                    numbers.textContent = result;
+                    return;
+                };
             }
         }
 
