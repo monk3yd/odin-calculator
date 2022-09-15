@@ -59,14 +59,13 @@ buttons.forEach(button => {
                 let firstNum = Number(chars[0]);
                 let secondNum = Number(chars[1]);
 
-                // Calculate and save result
+                // Calculate, show and save result
                 const result = operate(operator, firstNum, secondNum)
-                console.log(result);
+
+                numbers.textContent = result;
+                return;
             }
         }
-        // if (btnValue === "+" || btnValue === "-" || btnValue === "*" || btnValue === "/") {
-        //     operate()
-        // }
 
         // Clear btn reset display to 0
         if (btnValue === "AC") {
