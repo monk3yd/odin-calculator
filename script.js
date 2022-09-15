@@ -38,6 +38,35 @@ buttons.forEach(button => {
         // pressed btn value
         let btnValue = e.target.textContent;
         console.log(btnValue);
+        
+        if (btnValue === "=") {
+            // Convert string to array for extracting values
+            const chars = [...numbers.textContent]
+            console.log(chars);
+
+            // get operator index
+            const operatorIndex = chars.indexOf("+");
+
+            // Extract operator from array
+            const operator = chars[operatorIndex];
+
+            // if operator exists in array
+            if (operatorIndex !== -1) {
+
+                // Extract numbers by removing operators
+                chars.splice(operatorIndex, 1);
+                console.log(chars);
+                let firstNum = Number(chars[0]);
+                let secondNum = Number(chars[1]);
+
+                // Calculate and save result
+                const result = operate(operator, firstNum, secondNum)
+                console.log(result);
+            }
+        }
+        // if (btnValue === "+" || btnValue === "-" || btnValue === "*" || btnValue === "/") {
+        //     operate()
+        // }
 
         // Clear btn reset display to 0
         if (btnValue === "AC") {
