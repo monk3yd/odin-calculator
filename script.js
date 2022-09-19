@@ -30,8 +30,9 @@ function operate(operator, a, b) {
     }
 };
 
-const numbers = document.querySelector("#numbers");
-numbers.textContent = "0";
+const display = document.querySelector("#display");
+display.textContent = "0";
+
 const buttons = document.querySelectorAll(".btn")
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
@@ -40,54 +41,52 @@ buttons.forEach(button => {
         console.log(btnValue);
         
         if (btnValue === "=") {
-            // Convert string to array for extracting values
-            const chars = [...numbers.textContent]
+            const chars = display.textContent
             console.log(chars);
 
-            const allOperators = ["*", "/", "+", "-"];
-            for (let operator of allOperators ) {
-                // get operator index
-                const operatorIndex = chars.indexOf(operator);
-                console.log(operatorIndex);
+            let operator = "+";
+            // const allOperators = ["*", "/", "+", "-"];
+            // for (let operator of allOperators ) {
+                // Check if operator exists in given string operation
+            operatorExists = chars.indexOf(operator)
+            console.log(operatorExists);
+            // if (!(operatorExists)) {
+            //     continue;
+            // }
 
-                // if operator exists in array
-                if (operatorIndex !== -1) {
-                    // Extract numbers by removing operators
-                    chars.splice(operatorIndex, 1);
-                    console.log(chars);
-                    let firstNum = Number(chars[0]);
-                    let secondNum = Number(chars[1]);
+            let operands = chars.split(operator);
 
-                    // Calculate operation result 
-                    const result = operate(operator, firstNum, secondNum)
+            // Calculate operation result
+            let result = operate(
+                operator,
+                Number(operands[0]),
+                Number(operands[1])
+            )
+            console.log(result);
 
-                    chars.shift()
-                    chars.shift()
-
-                    // Show result
-                    numbers.textContent = result;
-                    return;
-                };
-            }
+            // Show result
+            display.textContent = result;
+            return;
+            // };
         }
 
         // Clear btn reset display to 0
         if (btnValue === "AC") {
-            numbers.textContent = "0";
+            display.textContent = "0";
             return;
         }
 
         // Can't add multiple 0 as init value on display
-        if (btnValue === "0" && numbers.textContent.length === 1 && numbers.textContent === "0") {
+        if (btnValue === "0" && display.textContent.length === 1 && display.textContent === "0") {
             return;
         // Can't add more than one "." in display
-        } else if (btnValue === "." && numbers.textContent.includes(".")) {
+        } else if (btnValue === "." && display.textContent.includes(".")) {
             return;
         // Replace init 0 in display for first entered num
-        } else if (btnValue !== "0" && btnValue != "." && numbers.textContent === "0"){
-            numbers.textContent = "";
+        } else if (btnValue !== "0" && btnValue != "." && display.textContent === "0"){
+            display.textContent = "";
         }
-        numbers.textContent += btnValue;
+        display.textContent += btnValue;
     });
 })
 
