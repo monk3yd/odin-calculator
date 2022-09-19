@@ -41,32 +41,39 @@ buttons.forEach(button => {
         console.log(btnValue);
         
         if (btnValue === "=") {
+            // Inputted operation
             const chars = display.textContent
             console.log(chars);
 
-            let operator = "+";
-            // const allOperators = ["*", "/", "+", "-"];
-            // for (let operator of allOperators ) {
+            const allOperators = ["*", "/", "+", "-"];
+            for (let operator of allOperators ) {
                 // Check if operator exists in given string operation
-            operatorExists = chars.indexOf(operator)
-            console.log(operatorExists);
-            // if (!(operatorExists)) {
-            //     continue;
-            // }
+                operatorExists = chars.indexOf(operator)
+                console.log(`Operator ${operator} does exist? ${operatorExists}`);
+                if (operatorExists === -1) {
+                    continue;
+                }
+                // Get operator index - 1 and index + 1 for extracting operands
+                let leftOperandIndex = operatorExists - 1;
+                let rightOperandIndex = operatorExists + 1;
 
-            let operands = chars.split(operator);
+                let operandLeft = chars[leftOperandIndex];
+                let operandRight = chars[rightOperandIndex];
 
-            // Calculate operation result
-            let result = operate(
-                operator,
-                Number(operands[0]),
-                Number(operands[1])
-            )
-            console.log(result);
+                // Calculate operation result
+                let result = operate(
+                    operator,
+                    Number(operandLeft),
+                    Number(operandRight)
+                )
+                console.log(`Result: ${result}`)
+            }
 
-            // Show result
-            display.textContent = result;
-            return;
+            // console.log(result);
+            //
+            // // Show result
+            // display.textContent = result;
+            // return;
             // };
         }
 
