@@ -6,40 +6,52 @@ buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         // pressed btn value
         let btnValue = e.target.textContent;
-        console.log(btnValue);
+        console.log(`Press btn: ${btnValue}`);
         
         if (btnValue === "=") {
             // Inputted operation
-            const chars = display.textContent
+            let chars = display.textContent
             console.log(`Display: ${chars}`);
 
             const allOperators = ["*", "/", "+", "-"];
-            // Other way: iterate over chars looking for selector (read left-to-right)
-
-            for (let operator of allOperators ) {
-                // Check if operator exists in given string operation
-                operatorExists = chars.indexOf(operator)
-                console.log(`Operator ${operator} does exist? ${operatorExists}`);
-                if (operatorExists === -1) {
-                    continue;
+            let operatorIndexes = [];
+            
+            // iterate over chars looking for operators
+            for (let i = 0; i < chars.length; i++) {
+                // get all operators indexes
+                if (allOperators.includes(chars[i])) {
+                    operatorIndexes.push(i);
                 }
-                // split string at operator for getting operands in array
-                let operands = chars.split(operator)
-                console.log(operands);
-
-                // Calculate operation result
-                let result = operate(
-                    operator,
-                    Number(operands[0]),
-                    Number(operands[1])
-                )
-
-                // Show result
-                console.log(`Result: ${result}`)
-                display.textContent = result;
-                return;
-
             }
+            console.log(operatorIndexes);
+            let result = 0;
+            for (let i = 0; i < operatorIndexes.length; i++) {
+
+                // get all to left of operator
+                let leftOperand = Number(chars.slice(0, operatorIndexes[0]));
+                console.log(`Left Operand: ${leftOperand}`);
+
+                // get all to right of operator until next operator
+                let rightOperand = Number(chars.slice(operatorIndexes[0] + 1, operatorIndexes[1]))
+                console.log(`Right Operand: ${rightOperand}`);
+                
+                // operate
+                result = operate(chars[operatorIndexes[0]], leftOperand, rightOperand);
+                
+                if (i === operatorIndexes.length - 1) {
+                    chars = chars.slice(operatorIndexes[1]);
+                    console.log(`New Display: ${chars}`);
+                    break;
+                }
+                // new display with new result
+                chars = result + chars.slice(operatorIndexes[1]);
+                console.log(`New Display: ${chars}`);
+            }
+
+            // Show result
+            console.log(`Result: ${result}`)
+            display.textContent = result;
+            return;
         }
 
         // Clear btn reset display to 0
