@@ -13,6 +13,8 @@ buttons.forEach(button => {
             let chars = display.textContent
             console.log(`Display: ${chars}`);
 
+            // Can't divide by zero
+
             const allOperators = ["*", "/", "+", "-"];
             let operatorIndexes = [];
             
@@ -48,10 +50,14 @@ buttons.forEach(button => {
                 chars = result + chars.slice(operatorIndexes[1]);
                 console.log(`New Display: ${chars}`);
             }
-
+            
+            // Round result with long decimals so it don't overflow
+            let resultLength = String(result).length;
+            if (resultLength > 28) {
+                console.log(`working!`)
+            }
             // Show result
             console.log(`Result: ${result}`)
-            result = roundToTen(result);
             display.textContent = result;
             return;
         }
@@ -59,6 +65,7 @@ buttons.forEach(button => {
         // Clear btn reset display to 0
         if (btnValue === "AC") {
             display.textContent = "0";
+            operatorIndexes = [];
             return;
         }
 
@@ -75,10 +82,6 @@ buttons.forEach(button => {
         display.textContent += btnValue;
     });
 })
-
-function roundToTen(num) {
-    return +(Math.round(num + "e+10") + "e+10");
-}
 
 function operate(operator, a, b) {
     if (operator === "+") {
