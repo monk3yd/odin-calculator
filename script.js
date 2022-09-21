@@ -16,7 +16,7 @@ buttons.forEach(button => {
             const allOperators = ["*", "/", "+", "-"];
             let operatorIndexes = [];
             
-            // iterate over chars looking for operators
+            // iterate over display looking for operators
             for (let i = 0; i < chars.length; i++) {
                 // get all operators indexes
                 if (allOperators.includes(chars[i])) {
@@ -24,6 +24,7 @@ buttons.forEach(button => {
                 }
             }
             console.log(operatorIndexes);
+
             let result = 0;
             for (let i = 0; i < operatorIndexes.length; i++) {
 
@@ -50,6 +51,7 @@ buttons.forEach(button => {
 
             // Show result
             console.log(`Result: ${result}`)
+            result = roundToTen(result);
             display.textContent = result;
             return;
         }
@@ -73,6 +75,10 @@ buttons.forEach(button => {
         display.textContent += btnValue;
     });
 })
+
+function roundToTen(num) {
+    return +(Math.round(num + "e+10") + "e+10");
+}
 
 function operate(operator, a, b) {
     if (operator === "+") {
