@@ -14,6 +14,15 @@ buttons.forEach(button => {
             console.log(`Display: ${chars}`);
 
             // Can't divide by zero
+            if (chars.includes("/")) {
+                let divisionOperands = chars.split("/");
+                console.log(divisionOperands);
+                if (divisionOperands[1] === "0") {
+                    console.log("ERROR: So sad, zero division isn't allowed.")
+                    display.textContent = "ERROR: So sad, zero division isn't allowed.";
+                    return;
+                }
+            }
 
             const allOperators = ["*", "/", "+", "-"];
             let operatorIndexes = [];
@@ -52,10 +61,7 @@ buttons.forEach(button => {
             }
             
             // Round result with long decimals so it don't overflow
-            let resultLength = String(result).length;
-            if (resultLength > 28) {
-                console.log(`working!`)
-            }
+
             // Show result
             console.log(`Result: ${result}`)
             display.textContent = result;
